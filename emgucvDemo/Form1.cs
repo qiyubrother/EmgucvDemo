@@ -50,6 +50,15 @@ namespace emgucvDemo
         {
             Image<Bgr, Byte> frame = capt.QueryFrame().ToImage<Bgr, Byte>();
             imageBox1.Image = frame;
+            if (sw)
+            {
+                frame.Save(System.IO.Path.Combine(@"c:\dd", DateTime.Now.Hour.ToString()+ DateTime.Now.Minute.ToString()+ DateTime.Now.Second.ToString()+ DateTime.Now.Millisecond.ToString()+".jpg"));
+            }
+        }
+        bool sw = false;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            sw = !sw;
         }
     }
 }

@@ -52,7 +52,20 @@ namespace emgucvDemo
             imageBox1.Image = frame;
             if (sw)
             {
-                frame.Save(System.IO.Path.Combine(@"c:\dd", DateTime.Now.Hour.ToString()+ DateTime.Now.Minute.ToString()+ DateTime.Now.Second.ToString()+ DateTime.Now.Millisecond.ToString()+".jpg"));
+                if (!System.IO.Directory.Exists(System.IO.Path.Combine(Application.StartupPath, "Images")))
+                {
+                    try
+                    {
+                        System.IO.Directory.CreateDirectory(System.IO.Path.Combine(Application.StartupPath, "Images"));
+                    }
+                    catch { }
+                }
+                var fn = System.IO.Path.Combine(Application.StartupPath, "Images", 
+                    DateTime.Now.Hour.ToString().PadLeft(2, '0') 
+                    + DateTime.Now.Minute.ToString().PadLeft(2, '0') 
+                    + DateTime.Now.Second.ToString().PadLeft(2, '0') 
+                    + DateTime.Now.Millisecond.ToString() + ".jpg");
+                frame.Save(fn);
             }
         }
         bool sw = false;
